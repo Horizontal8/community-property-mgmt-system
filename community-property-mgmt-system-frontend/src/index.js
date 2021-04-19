@@ -1,17 +1,56 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import 'antd/dist/antd.css';
+import './styles/index.css';
+import { Tabs } from 'antd';
+import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
+import './components/DiscussionPage';
+import Discussion from "./components/DiscussionPage";
+
+const { TabPane } = Tabs;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+    <Tabs defaultActiveKey="2">
+        <TabPane
+            tab={
+                <span>
+          <AppleOutlined />
+          Discussion
+        </span>
+            }
+            key="1"
+        >
+            <Discussion/>
+        </TabPane>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+
+        <TabPane
+            tab={
+                <span>
+          <AndroidOutlined />
+          Calendar
+        </span>
+            }
+            key="2"
+        >
+            Tab 2
+        </TabPane>
+
+
+        <TabPane
+            tab={
+                <span>
+          <AndroidOutlined />
+          To do
+        </span>
+            }
+            key="3"
+        >
+            Tab 2
+        </TabPane>
+
+
+    </Tabs>,
+    document.getElementById('root'),
+);
