@@ -5,6 +5,7 @@ import { Form, Icon, Input, Button, message } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { API_ROOT } from '../constants';
+import axios from "axios";
 
 class NormalLoginForm extends Component {
     render() {
@@ -46,12 +47,19 @@ class NormalLoginForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
+
         this.props.form.validateFields((err, values) => {
+
             if (!err) {
                 console.log('Received values of form: ', values);
 
+
+                /*
                 fetch(`${API_ROOT}/login`, {
                     method: 'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
                     body: JSON.stringify({
                         username: values.username,
                         password: values.password
@@ -59,6 +67,7 @@ class NormalLoginForm extends Component {
                 })
                     .then(response => {
                         console.log(response);
+                        console.log(response.data);
                         if(response.ok){
                             return response.text();
                         }
@@ -72,10 +81,32 @@ class NormalLoginForm extends Component {
                     .catch(err => {
                         console.log(err);
                         message.error("Login Fail")
-                    })
+                    })*/
+                let a = values.username;
+                let b = values.password;
+                return axios
+                    .post(API_ROOT + "/login", {username: a,
+                            password: b},
+
+                        {headers: {
+                                'Content-Type':'application/json'
+                            }})
+            .then((response) => {
+                        if (response.data.accessToken) {
+                            localStorage.setItem("user", JSON.stringify(response.data));
+                        }
+
+                        console.log(response);
+                        return response.data;
+                    });
+
+
+
             }
+
         });
     };
+
 }
 
 const Login = Form.create({ name: 'normal_login' })(NormalLoginForm);

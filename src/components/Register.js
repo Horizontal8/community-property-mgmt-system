@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, Input, Icon, Button, Checkbox } from 'antd';
+import { Form, Input, Icon, Button } from 'antd';
 
 import { Link } from "react-router-dom";
 import { API_ROOT } from '../constants';
@@ -39,8 +39,7 @@ class RegistrationForm extends Component {
         return (
             <Form {...formItemLayout} onSubmit={this.handleSubmit}
                   className="register">
-                {/*username */}
-                <Form.Item label="Username">
+                <Form.Item label="Email">
                     {
                         getFieldDecorator('username', {
                             rules: [
@@ -49,41 +48,29 @@ class RegistrationForm extends Component {
                         })(<Input />)
                     }
                 </Form.Item>
-                {/*phone num*/}
                 <Form.Item
-                    name="phone"
+                    name="email"
+                    label="Username"
+                    tooltip="What do you want others to connect you?"
+                    rules={[
+                        {
+                            whitespace: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="phoneNum"
                     label="Phone Number"
                     rules={[
                         {
-                            required: true,
-                            message: 'Please input your phone number!',
+                            whitespace: true,
                         },
                     ]}
                 >
-                    <Input
-                        style={{
-                            width: '100%',
-                        }}
-                    />
+                    <Input />
                 </Form.Item>
-                {/*e-mail*/}
-                <Form.Item
-                    name="email"
-                    label="Email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your email address!',
-                        },
-                    ]}
-                >
-                    <Input
-                        style={{
-                            width: '100%',
-                        }}
-                    />
-                </Form.Item>
-                {/*password*/}
                 <Form.Item label="Password" hasFeedback>
                     {
                         getFieldDecorator('password', {
@@ -99,7 +86,6 @@ class RegistrationForm extends Component {
                         })(<Input.Password />)
                     }
                 </Form.Item>
-                {/*re-enter password*/}
                 <Form.Item label="Confirm Password" hasFeedback>
                     {
                         getFieldDecorator('confirm', {
@@ -115,23 +101,7 @@ class RegistrationForm extends Component {
                         })(<Input.Password onBlur={this.handleConfirmBlur} />)
                     }
                 </Form.Item>
-                {/*agreement*/}
-                <Form.Item
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                        {
-                            validator: (_, value) =>
-                                value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-                        },
-                    ]}
-                    {...tailFormItemLayout}
-                >
-                    {/*put in the agreement href*/}
-                    <Checkbox>
-                        I have read the <a href="">agreement</a>
-                    </Checkbox>
-                </Form.Item>
+
                 <Form.Item {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit">
                         Register
@@ -168,13 +138,18 @@ class RegistrationForm extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
+
             if (!err) {
                 console.log('Received values of form: ', values);
 
                 fetch(`${API_ROOT}/signup`, {
                     method: 'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+
                     body: JSON.stringify({
-                        username: values.username,
+                        email: values.username,
                         password: values.password
                     })
                 })
@@ -194,6 +169,5 @@ class RegistrationForm extends Component {
 }
 
 const Register = Form.create({ name: 'register' })(RegistrationForm);
-
 
 export default Register;

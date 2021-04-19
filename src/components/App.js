@@ -5,10 +5,12 @@ import Main from './Main';
 
 import { TOKEN_KEY } from '../constants';
 
-class App extends Component{
+class App extends React.Component{
+
     state = {
         isLoggedIn: Boolean(localStorage.getItem(TOKEN_KEY)),
     }
+
 
     handleLoginSucceed = (token) => {
         console.log('token --- ', token)
@@ -35,5 +37,16 @@ class App extends Component{
         );
     }
 }
+/*
+export function authHeader(){
+    let user = JSON.parse(localStorage.getItem('user'));
 
+    if (user && user.authenticatorData){
+        console.log(user.authenticatorData);
+        return {'Authorization':'Basic ' + user.authenticatorData};
+    } else {
+        return {};
+    }
+}
+*/
 export default App;
