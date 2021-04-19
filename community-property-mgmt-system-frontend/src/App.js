@@ -1,5 +1,5 @@
 import './components/DiscussionPage'
-import './App.css';
+import './styles/App.css';
 import Discussion from "./components/DiscussionPage";
 
 function App() {
