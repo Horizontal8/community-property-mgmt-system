@@ -54,34 +54,36 @@ class NormalLoginForm extends Component {
                 console.log('Received values of form: ', values);
 
 
-                /*
-                fetch(`${API_ROOT}/login`, {
-                    method: 'POST',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify({
-                        username: values.username,
-                        password: values.password
-                    })
-                })
-                    .then(response => {
-                        console.log(response);
-                        console.log(response.data);
-                        if(response.ok){
-                            return response.text();
-                        }
-                        throw new Error(response.stateText)
-                    })
-                    .then(data => {
-                        console.log(data);
-                        this.props.handleLoginSucceed(data)
-                        message.success("Login Success")
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        message.error("Login Fail")
-                    })*/
+
+                // fetch(`${API_ROOT}/login`, {
+                //     method: 'POST',
+                //     headers:{
+                //         'Content-Type':'application/json'
+                //     },
+                //     body: JSON.stringify({
+                //         username: values.username,
+                //         password: values.password
+                //     })
+                // })
+                //     .then(response => {
+                //         console.log("response~~~~~~");
+                //         console.log(response);
+                //         console.log(response.headers);
+                //         if(response.ok){
+                //             return response.text();
+                //         }
+                //         throw new Error(response.stateText)
+                //     })
+                //     .then(data => {
+                //         console.log("data~~~~~~")
+                //         console.log(data);
+                //         this.props.handleLoginSucceed(data)
+                //         message.success("Login Success")
+                //     })
+                //     .catch(err => {
+                //         console.log(err);
+                //         message.error("Login Fail")
+                //     })
                 let a = values.username;
                 let b = values.password;
                 return axios
@@ -95,12 +97,15 @@ class NormalLoginForm extends Component {
                         if (response.data.accessToken) {
                             localStorage.setItem("user", JSON.stringify(response.data));
                         }
-
-                        console.log(response);
+                        console.log('response~~~~~~~');
+                        console.log('response: ',response);
+                        console.log('response header: ',response.headers.authorization);
+                        this.props.handleLoginSucceed(response.headers.authorization)
                         return response.data;
-                    });
-
-
+                    }).catch(err => {
+                                 console.log(err);
+                                 message.error("Login Fail")
+                             });
 
             }
 
