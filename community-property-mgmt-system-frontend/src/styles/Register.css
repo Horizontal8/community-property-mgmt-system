@@ -1,0 +1,9 @@
+.register {
+    width: 500px;
+    margin: 0 auto;
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    margin-top: -50px;
+    margin-left: -100px;
+}

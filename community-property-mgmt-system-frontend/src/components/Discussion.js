@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-import DiscussionBoard from 'react-discussion-board'
+import DiscussionBoard from 'react-discussion-board';
 
 import 'react-discussion-board/dist/index.css'
 
-const Discussion = () => {
+const App = () => {
     const allPosts = [
         {
             profileImage:
@@ -47,4 +47,4 @@ const Discussion = () => {
     )
 }
 
-export default Discussion;
+export default App
