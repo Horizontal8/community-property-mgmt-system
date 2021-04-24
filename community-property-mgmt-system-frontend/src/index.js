@@ -1,56 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import './styles/index.css';
-import { Tabs } from 'antd';
-import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
-import './components/DiscussionPage';
-import Discussion from "./components/DiscussionPage";
+import './index.css';
+import App from './components/App';
+import * as serviceWorker from './serviceWorker';
 
-const { TabPane } = Tabs;
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-    <Tabs defaultActiveKey="2">
-        <TabPane
-            tab={
-                <span>
-          <AppleOutlined />
-          Discussion
-        </span>
-            }
-            key="1"
-        >
-            <Discussion/>
-        </TabPane>
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+    ,
+    document.getElementById('root'));
 
-
-
-        <TabPane
-            tab={
-                <span>
-          <AndroidOutlined />
-          Calendar
-        </span>
-            }
-            key="2"
-        >
-            Tab 2
-        </TabPane>
-
-
-        <TabPane
-            tab={
-                <span>
-          <AndroidOutlined />
-          To do
-        </span>
-            }
-            key="3"
-        >
-            Tab 2
-        </TabPane>
-
-
-    </Tabs>,
-    document.getElementById('root'),
-);
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

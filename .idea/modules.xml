@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/apartment.iml" filepath="$PROJECT_DIR$/.idea/apartment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/community-property-mgmt-system.iml" filepath="$PROJECT_DIR$/.idea/community-property-mgmt-system.iml" />
     </modules>
   </component>
 </project>
